@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  load_and_authorize_resource
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy ]
   before_action :set_book, only: [:show, :edit, :update, :destroy]
   before_action :set_categories_authors, only: [:new, :edit, :update, :create]
@@ -17,6 +18,7 @@ class BooksController < ApplicationController
   # GET /books/new
   def new
     @book = current_user.books.build
+    @image = @book.images.build
   end
 
   # GET /books/1/edit
@@ -30,6 +32,9 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if @book.save
+        params[:images]['attachment'].each do |a|
+          @image = @book.images.create!(attachment: a, book_id: @book.id, user_id: current_user.id)
+        end
         format.html { redirect_to @book, notice: 'Book was successfully created. It will be added after moderation!' }
         format.json { render :show, status: :created, location: @book }
       else

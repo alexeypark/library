@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   namespace :admin do
     root 'books#index'
     resources :authors
-    # resources :users, only: [:index]
-    # put '/users/:id', to: 'users#activate', as: 'user'
+    resources :users, only: [:index]
+    put '/users/:id', to: 'users#activate', as: 'user'
     resources :books, only: [:index, :destroy]
     put '/books/:id', to: 'books#activate'
     resources :categories

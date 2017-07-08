@@ -1,4 +1,4 @@
-<%= simple_form_for(@book) do |f| %>
+<%= simple_form_for(@book, html: { multipart: true }) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
@@ -7,8 +7,8 @@
     <%= f.input :cover %>
     <%= f.input :category_ids, collection: @categories, input_html: { multiple: true } %>
     <%= f.input :author_ids, collection: @authors, input_html: { multiple: true } %>
-    <%= f.simple_fields_for :images, Image.new do |image_form|  %>
-      <%= image_form.file_field :image, multiple: true, name: "book[images_attributes][][attachment]" %>
+    <%= f.simple_fields_for :images do |image_form|  %>
+      <%= image_form.file_field :attachment, multiple: true, name: "images[attachment][]" %>
         <% end %>
 
 
