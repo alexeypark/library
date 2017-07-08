@@ -1,0 +1,12 @@
+<h3>Reviews</h3>
+<% reviews.each do |review| %>
+    <% if review.user == current_user %>
+        <%= link_to book_review_path(review.book, review), method: :delete, data: { confirm: "Are you sure?" } do %>
+            <span class="glyphicon glyphicon-remove delete-comment"></span>
+        <% end %>
+    <% end %>
+    On <%= review.created_at %>, <%= review.user %> said: <br>
+  Rate: <%= review.rate %> <br>
+  Review: <%= review.body %> <br>
+    ----------------- <br>
+<% end %>

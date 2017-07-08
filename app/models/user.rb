@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :books
+  has_many :images
+  has_many :reviews
 
   def role?(r)
     role.include? r.to_s

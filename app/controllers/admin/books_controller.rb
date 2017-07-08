@@ -1,10 +1,12 @@
-class BooksController < AdminController
+class Admin::BooksController < AdminController
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy ]
   before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_categories_authors, only: [:new, :edit, :update, :create]
 
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+    @books = Book.where(active: true)
   end
 
   # GET /books/1
@@ -15,8 +17,6 @@ class BooksController < AdminController
   # GET /books/new
   def new
     @book = current_user.books.build
-    @categories = Category.all
-    @authors = Author.all
   end
 
   # GET /books/1/edit
@@ -30,7 +30,7 @@ class BooksController < AdminController
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to @book, notice: 'Book was successfully created.' }
+        format.html { redirect_to @book, notice: 'Book was successfully created. It will be added after moderation!' }
         format.json { render :show, status: :created, location: @book }
       else
         format.html { render :new }
@@ -64,13 +64,18 @@ class BooksController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_book
-      @book = Book.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def book_params
-      params.require(:book).permit(:name, :description, :cover, category_ids: [], autor_ids: [])
-    end
+  def set_categories_authors
+    @categories = Category.all
+    @authors = Author.all
+  end
+  def set_book
+    @book = Book.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def book_params
+    params.require(:book).permit(:name, :description, :cover, :terms, :active, category_ids: [], author_ids: [], images_attributes: [:book_id, :attachment, :user_id, :id])
+  end
 end

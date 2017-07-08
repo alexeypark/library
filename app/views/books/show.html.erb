@@ -15,5 +15,32 @@
   <%= @book.cover %>
 </p>
 
+<%= @book.rate_count %>
+
+<% @book.authors.each do |author| %>
+    <p><%= author.name %></p>
+    <p><%= author.overall_rate %></p>
+<% end %>
+
+<% @book.categories.each do |category| %>
+    <p><%= category.name %></p>
+<% end %>
+
+<%= simple_form_for [@book, @book.reviews.build] do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <%= f.input :rate %>
+      <%= f.input :body %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit %>
+    </div>
+<% end %>
+
+<%= render 'reviews/reviews', reviews: @book.reviews %>
+
+
 <%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Back', books_path %>

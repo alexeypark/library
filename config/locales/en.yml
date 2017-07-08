@@ -31,3 +31,10 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    errors:
+      models:
+        book:
+          attributes:
+            terms:
+              terms_not_accepted: 'You have to accept terms and conditions'
