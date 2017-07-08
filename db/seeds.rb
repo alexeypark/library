@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+admin = User.create!(email: 'admin@example.com', password: 'password', role: 'admin')
+user = User.create!(email: 'user@example.com', password: 'password', role: 'none')
+
+10.times {Author.create(name: Faker::Book.author)}
+10.times {Category.create(name: Faker::Book.genre)}
