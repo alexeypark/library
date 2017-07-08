@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :images
   root 'books#index'
 
   resources :authors
