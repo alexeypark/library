@@ -61,3 +61,6 @@ gem 'devise'
 gem 'faker'
 
 gem 'bootstrap-sass'
+
+gem 'carrierwave'
+gem 'mini_magick'

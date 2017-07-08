@@ -4,10 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  def admin_user
-    unless current_user.role == 'admin'
-      flash[:danger] = "You don't have enough permissions"
-      redirect_to root_url
-    end
+  has_many :books
+
+  def role?(r)
+    role.include? r.to_s
   end
 end

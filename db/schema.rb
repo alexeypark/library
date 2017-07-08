@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 20170708075105) do
     t.string "name"
     t.text "description"
     t.string "cover"
+    t.boolean "active", default: false
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -58,6 +60,7 @@ ActiveRecord::Schema.define(version: 20170708075105) do
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.string "role", default: "none"
+    t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
