@@ -5,6 +5,12 @@
   <%= @book.name %>
 </p>
 
+<%= image_tag(@book.cover) %>
+
+<% @book.images.each do |image| %>
+    <%= image.attachment %>
+<% end %>
+
 <p>
   <strong>Description:</strong>
   <%= @book.description %>
