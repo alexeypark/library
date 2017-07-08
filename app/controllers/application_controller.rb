@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  load_and_authorize_resource
+  before_action :configure_permitted_parameters, if: :devise_controller?
   protect_from_forgery with: :exception
 
   def admin_user
@@ -7,5 +9,12 @@ class ApplicationController < ActionController::Base
       flash[:alert] = 'You don\'t have enough permissions!'
       redirect_to root_path
     end
+  end
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:active, :role])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:active, :role])
   end
 end

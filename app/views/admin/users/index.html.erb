@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Users</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>E-mail</th>
+    <th colspan="1"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <% if user.active? %>
+            <td><%= link_to 'Inactivate', admin_user_url(user), method: :put, data: { confirm: 'Are you sure?' } %></td>
+        <% else %>
+            <td><%= link_to 'Activate', admin_user_url(user), method: :put, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>

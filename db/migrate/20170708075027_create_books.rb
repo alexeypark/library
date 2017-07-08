@@ -6,6 +6,7 @@ class CreateBooks < ActiveRecord::Migration[5.1]
       t.string :cover
       t.boolean :active, default: false
       t.integer :user_id
+      t.integer :book_id
 
       t.timestamps
     end

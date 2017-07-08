@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20170708101148) do
     t.string "cover"
     t.boolean "active", default: false
     t.integer "user_id"
+    t.integer "book_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

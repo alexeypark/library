@@ -3,7 +3,7 @@ class Book < ApplicationRecord
   has_and_belongs_to_many :authors
   belongs_to :user
   has_many :images
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
 
   mount_uploader :cover, CoverUploader
   accepts_nested_attributes_for :images, allow_destroy: true

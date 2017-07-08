@@ -6,12 +6,7 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.search(params[:search]).all
-  end
-
-  def search
-    search = "%" + params[:search] + "%"
-    @books = Book.order('name ASC').where("name like ?", search)
+    @books = Book.search(params[:search]).all.sort_by {|book| book.rate_count}.reverse
   end
 
   # GET /books/1
